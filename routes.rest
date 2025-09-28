@@ -1,0 +1,12 @@
+// LOCALHOST 
+###
+GET http://localhost:3000/contacts HTTP/1.1
+GET http://localhost:3000/contacts/68d8c61abe01d07f4bb16925 HTTP/1.1
+GET http://localhost:3000/contacts/68d8c61abe01d07f4bb16926 HTTP/1.1
+GET http://localhost:3000/contacts/622023f642f9ab4cd6e060b4 HTTP/1.1
+
+// PRODUCTION Deploy 
+###
+GET https://cse341-jorge.onrender.com/contacts/68d8c61abe01d07f4bb16925 HTTP/1.1
+GET https://cse341-jorge.onrender.com/contacts/68d8c61abe01d07f4bb16926 HTTP/1.1
+GET https://cse341-jorge.onrender.com/contacts/68d8c61abe01d07f4bb16927 HTTP/1.1
