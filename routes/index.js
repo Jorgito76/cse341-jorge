@@ -1,8 +1,9 @@
-const routes = require('express').Router();
+// routes/index.js
+const { Router } = require('express');
+const contacts = require('./contacts');
 
-const myController = require('../controllers');
+const router = Router();
+router.get('/', (req, res) => res.send('API is up'));
+router.use('/contacts', contacts);
 
-routes.get('/', myController.awesomeFunction);
-routes.get('/awesome', myController.returnAnotherPerson);
-
-module.exports = routes;
+module.exports = router;

@@ -5,3 +5,33 @@ GET http://localhost:3000/awesome HTTP/1.1
 
 ###
 GET https://cse341-jorge.onrender.com HTTP/1.1
+
+// add, delete, update requests
+
+POST http://localhost:3000/contacts HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Ali",
+  "lastName": "Joson",
+  "email": "ali@example.com",
+  "favoriteColor": "Red",
+  "birthday": "1928-07-10"
+}
+
+// replace ID with the one that is returned above
+// to make an update
+PUT http://localhost:3000/contacts/:id
+Content-Type: application/json
+
+{
+  "firstName": "Ali",
+  "lastName": "Joson",
+  "email": "ali@newmail.com",
+  "favoriteColor": "Green",
+  "birthday": "19915-08-10"
+}
+
+
+//quick delete
+DELETE http://localhost:3000/contacts/:id HTTP/1.1

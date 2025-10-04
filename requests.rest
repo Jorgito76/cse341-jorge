@@ -1,0 +1,69 @@
+### Local API base
+@baseLocal = http://localhost:3000
+
+### Live Render API base
+@baseRender = https://cse341-jorge.onrender.com
+
+
+### --------------------------
+### CREATE (POST) - 201 + ID
+POST {{baseLocal}}/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "1992-03-15"
+}
+
+
+### --------------------------
+### UPDATE (PUT) - 204
+# Replace <id> with the ID from the POST response
+PUT {{baseLocal}}/contacts/<id>
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice@newmail.com",
+  "favoriteColor": "Green",
+  "birthday": "1992-03-15"
+}
+
+
+### --------------------------
+### DELETE - 200 + { deleted: true }
+# Replace <id> with the ID from the POST response
+DELETE {{baseLocal}}/contacts/<id>
+
+
+### --------------------------
+### LIVE RENDER TESTS
+### (Run these after confirming your Render deploy)
+
+POST {{baseRender}}/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Brian",
+  "lastName": "Martinez",
+  "email": "brian@example.com",
+  "favoriteColor": "Teal",
+  "birthday": "1988-07-22"
+}
+
+PUT {{baseRender}}/contacts/<id>
+Content-Type: application/json
+
+{
+  "firstName": "Brian",
+  "lastName": "Martinez",
+  "email": "brian@update.com",
+  "favoriteColor": "Green",
+  "birthday": "1988-07-22"
+}
+
+DELETE {{baseRender}}/contacts/<id>
