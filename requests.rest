@@ -43,26 +43,27 @@ DELETE {{baseLocal}}/contacts/68e165ec5c121dbd583bc6a4
 ### --------------------------
 ### LIVE RENDER TESTS
 
-POST {{baseRender}}/contacts
+GET https://cse341-jorge.onrender.com/
+
+###
+GET https://cse341-jorge.onrender.com/contacts
+
+//create new contact
+###
+POST https://cse341-jorge.onrender.com/contacts
 Content-Type: application/json
+Accept: application/json
 
-{
-  "firstName": "Brian",
-  "lastName": "Martinez",
-  "email": "brian@example.com",
-  "favoriteColor": "Teal",
-  "birthday": "1988-07-22"
-}
+< ./body.json
 
-PUT {{baseRender}}/contacts/<id>
+//updates created contact, will need to update the ID
+###
+PUT https://cse341-jorge.onrender.com/contacts/68e174aa017b73509b11b42b
 Content-Type: application/json
+Accept: application/json
 
-{
-  "firstName": "Brian",
-  "lastName": "Martinez",
-  "email": "brian@update.com",
-  "favoriteColor": "Green",
-  "birthday": "1988-07-22"
-}
+< ./put-body.json
 
-DELETE {{baseRender}}/contacts/<id>
+//deletes the contact by ID
+###
+DELETE https://cse341-jorge.onrender.com/contacts/68e174aa017b73509b11b42b
