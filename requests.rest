@@ -42,7 +42,6 @@ DELETE {{baseLocal}}/contacts/<id>
 
 ### --------------------------
 ### LIVE RENDER TESTS
-### (Run these after confirming your Render deploy)
 
 POST {{baseRender}}/contacts
 Content-Type: application/json
