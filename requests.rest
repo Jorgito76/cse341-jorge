@@ -21,8 +21,8 @@ Content-Type: application/json
 
 ### --------------------------
 ### UPDATE (PUT) - 204
-# Replace <id> with the ID from the POST response
-PUT {{baseLocal}}/contacts/<id>
+# Replace <id> with the ID from the POST response!! IMPORTANT
+PUT {{baseLocal}}/contacts/68e165ec5c121dbd583bc6a4
 Content-Type: application/json
 
 {
@@ -36,8 +36,8 @@ Content-Type: application/json
 
 ### --------------------------
 ### DELETE - 200 + { deleted: true }
-# Replace <id> with the ID from the POST response
-DELETE {{baseLocal}}/contacts/<id>
+# Replace <id> with the ID from the POST response!! IMPORTANT
+DELETE {{baseLocal}}/contacts/68e165ec5c121dbd583bc6a4
 
 
 ### --------------------------
