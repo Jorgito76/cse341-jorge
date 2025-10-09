@@ -1,8 +1,11 @@
 // server.js
 const express = require('express');
 const { initDb } = require('./db/connect');
+const { swaggerDocs } = require('./swagger');
 
 const app = express();
+swaggerDocs(app);
+
 
 // Accept standard JSON plus "+json" types some clients/proxies send
 app.use(express.json({ type: ['application/json', 'application/*+json', 'text/json'], limit: '1mb', strict: true }));
