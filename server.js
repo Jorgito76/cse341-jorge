@@ -6,6 +6,21 @@ const { swaggerDocs } = require('./swagger');
 const app = express();
 swaggerDocs(app);
 
+const cors = require('cors');
+
+
+app.use(cors({
+  origin: [
+    'https://cse341-contacts-frontend.netlify.app', 
+    'http://localhost:5173' 
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Accept']
+}));
+
+app.use(express.json());
+app.use('/', require('./routes'));
+
 
 // Accept standard JSON plus "+json" types some clients/proxies send
 app.use(express.json({ type: ['application/json', 'application/*+json', 'text/json'], limit: '1mb', strict: true }));
