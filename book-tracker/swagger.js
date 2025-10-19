@@ -10,9 +10,8 @@ const options = {
       description: 'API documentation for the Book Tracker Project (Week 5)'
     },
     servers: [
+      { url: 'https://book-tracker-jorge.onrender.com', description: 'Render' },
       { url: 'http://localhost:3001', description: 'Local' }
-      // After you create your Render service, add it here:
-      // { url: 'https://YOUR-RENDER-SERVICE.onrender.com', description: 'Render' }
     ]
   },
   apis: ['./routes/*.js']
