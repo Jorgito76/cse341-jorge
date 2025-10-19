@@ -7,7 +7,7 @@ async function connect(uri) {
   if (db) return db;
   client = new MongoClient(uri);
   await client.connect();
-  db = client.db(); // uses DB name in your URI (books_db)
+  db = client.db();
   return db;
 }
 

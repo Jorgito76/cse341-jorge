@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Import your controller functions
+// Import controller functions
 const {
   listBooks,
   getBook,
