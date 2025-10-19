@@ -35,6 +35,10 @@
     },
     "/books/": {
       "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get all books",
         "description": "",
         "responses": {
           "200": {
@@ -43,7 +47,22 @@
         }
       },
       "post": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Create a new book",
         "description": "",
+        "parameters": [
+          {
+            "name": "book",
+            "in": "body",
+            "required": true,
+            "description": "Book object that needs to be added",
+            "schema": {
+              "$ref": "#/definitions/BookCreate"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -56,13 +75,18 @@
     },
     "/books/{id}": {
       "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get a single book by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "MongoDB ObjectId of the book"
           }
         ],
         "responses": {
@@ -78,13 +102,27 @@
         }
       },
       "put": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Update an existing book",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "MongoDB ObjectId of the book to update"
+          },
+          {
+            "name": "book",
+            "in": "body",
+            "required": true,
+            "description": "Updated book fields",
+            "schema": {
+              "$ref": "#/definitions/BookUpdate"
+            }
           }
         ],
         "responses": {
@@ -100,13 +138,18 @@
         }
       },
       "delete": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Delete a book by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "MongoDB ObjectId of the book to delete"
           }
         ],
         "responses": {
@@ -119,6 +162,66 @@
           "404": {
             "description": "Not Found"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BookCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Atomic Habits"
+        },
+        "author": {
+          "type": "string",
+          "example": "James Clear"
+        },
+        "genre": {
+          "type": "string",
+          "example": "Self-Improvement"
+        },
+        "status": {
+          "type": "string",
+          "example": "reading"
+        },
+        "rating": {
+          "type": "number",
+          "example": 5
+        },
+        "notes": {
+          "type": "string",
+          "example": "Excellent guide on building better habits."
+        }
+      }
+    },
+    "BookUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Atomic Habits"
+        },
+        "author": {
+          "type": "string",
+          "example": "James Clear"
+        },
+        "genre": {
+          "type": "string",
+          "example": "Self-Improvement"
+        },
+        "status": {
+          "type": "string",
+          "example": "completed"
+        },
+        "rating": {
+          "type": "number",
+          "example": 4
+        },
+        "notes": {
+          "type": "string",
+          "example": "Finished reading — very useful."
         }
       }
     }

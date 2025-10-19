@@ -1,6 +1,7 @@
-// book-tracker/routes/books.js
 const express = require('express');
 const router = express.Router();
+
+// Import your controller functions
 const {
   listBooks,
   getBook,
@@ -9,74 +10,76 @@ const {
   deleteBook
 } = require('../controllers/books');
 
-/**
- * @swagger
- * /books:
- *   get:
- *     summary: Get all books
- *   post:
- *     summary: Create a new book
- *     consumes:
- *       - application/json
- *     parameters:
- *       - in: body
- *         name: book
- *         description: The book to create
- *         schema:
- *           type: object
- *           required: [title, author, genre, status]
- *           properties:
- *             title:   { type: string, example: "Atomic Habits" }
- *             author:  { type: string, example: "James Clear" }
- *             genre:   { type: string, example: "Self-Improvement" }
- *             status:  { type: string, example: "reading" }
- *             rating:  { type: integer, example: 5 }
- *             notes:   { type: string, example: "Great chapter on habit stacking." }
- *
- * /books/{id}:
- *   get:
- *     summary: Get a book by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: string }
- *   put:
- *     summary: Update a book by ID
- *     consumes:
- *       - application/json
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: string }
- *       - in: body
- *         name: book
- *         description: Updated book fields
- *         schema:
- *           type: object
- *           properties:
- *             title:   { type: string, example: "Atomic Habits" }
- *             author:  { type: string, example: "James Clear" }
- *             genre:   { type: string, example: "Self-Improvement" }
- *             status:  { type: string, example: "completed" }
- *             rating:  { type: integer, example: 4 }
- *             notes:   { type: string, example: "Finished—very actionable." }
- *   delete:
- *     summary: Delete a book by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: string }
- */
+// =============== Swagger: Book Routes ===============
 
-// IMPORTANT: because this router is mounted at '/books' in routes/index.js,
-// the path here should be '/' and '/:id'
-router.get('/', listBooks);
-router.get('/:id', getBook);
-router.post('/', createBook);
-router.put('/:id', updateBook);
-router.delete('/:id', deleteBook);
+// GET /books - Get all books
+router.get(
+  '/',
+  /* #swagger.tags = ['Books'] */
+  /* #swagger.summary = 'Get all books' */
+  listBooks
+);
+
+// GET /books/{id} - Get single book by ID
+router.get(
+  '/:id',
+  /* #swagger.tags = ['Books'] */
+  /* #swagger.summary = 'Get a single book by ID' */
+  /* #swagger.parameters['id'] = {
+        in: 'path',
+        required: true,
+        type: 'string',
+        description: 'MongoDB ObjectId of the book'
+  } */
+  getBook
+);
+
+// POST /books - Create a new book
+router.post(
+  '/',
+  /* #swagger.tags = ['Books'] */
+  /* #swagger.summary = 'Create a new book' */
+  /* #swagger.parameters['book'] = {
+        in: 'body',
+        required: true,
+        description: 'Book object that needs to be added',
+        schema: { $ref: '#/definitions/BookCreate' }
+  } */
+  createBook
+);
+
+// PUT /books/{id} - Update an existing book
+router.put(
+  '/:id',
+  /* #swagger.tags = ['Books'] */
+  /* #swagger.summary = 'Update an existing book' */
+  /* #swagger.parameters['id'] = {
+        in: 'path',
+        required: true,
+        type: 'string',
+        description: 'MongoDB ObjectId of the book to update'
+  } */
+  /* #swagger.parameters['book'] = {
+        in: 'body',
+        required: true,
+        description: 'Updated book fields',
+        schema: { $ref: '#/definitions/BookUpdate' }
+  } */
+  updateBook
+);
+
+// DELETE /books/{id} - Delete a book
+router.delete(
+  '/:id',
+  /* #swagger.tags = ['Books'] */
+  /* #swagger.summary = 'Delete a book by ID' */
+  /* #swagger.parameters['id'] = {
+        in: 'path',
+        required: true,
+        type: 'string',
+        description: 'MongoDB ObjectId of the book to delete'
+  } */
+  deleteBook
+);
 
 module.exports = router;
