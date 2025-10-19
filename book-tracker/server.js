@@ -1,29 +1,38 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
-const { connect } = require('./db/connection');
-const { mountSwagger } = require('./swagger');
+const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger-output.json');
+const { connectDB } = require('./db/connection');
 
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+//  Enable CORS for all requests
+app.use(cors({
+  origin: ['https://cse341-jorge.onrender.com', 'http://localhost:3001'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
-mountSwagger(app);
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//  Swagger documentation route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+//  Database connection
+connectDB();
+
+//  Base route
+app.get('/', (req, res) => {
+  res.send('Book Tracker API is up');
+});
+
+//  Routes
 app.use('/', require('./routes'));
 
+//  Port listener
 const PORT = process.env.PORT || 3001;
-
-(async () => {
-  try {
-    const uri = process.env.MONGODB_URI;
-    if (!uri) throw new Error('Missing MONGODB_URI');
-    await connect(uri);
-    app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-})();
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
