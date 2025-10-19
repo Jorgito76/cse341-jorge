@@ -53,4 +53,12 @@ async function deleteBook(req, res) {
   res.status(200).json({ deleted: true });
 }
 
-module.exports = { listBooks, getBook, createBook, updateBook, deleteBook };
+// book-tracker/controllers/books.js
+module.exports = {
+  listBooks,
+  getBook,
+  createBook,
+  updateBook,
+  deleteBook
+};
+
