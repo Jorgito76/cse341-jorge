@@ -1,101 +1,96 @@
-const { Router } = require('express');
-const {
-  listBooks, getBook, createBook, updateBook, deleteBook
-} = require('../controllers/books');
+const express = require('express');
+const router = express.Router();
+const booksController = require('../controllers/books');
 
-const router = Router();
-
-/**
- * @swagger
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- *   schemas:
- *     Book:
- *       type: object
- *       required: [title, author, genre, status]
- *       properties:
- *         _id: { type: string, description: Auto-generated ID }
- *         title: { type: string }
- *         author: { type: string }
- *         isbn: { type: string }
- *         genre: { type: string }
- *         status: { type: string, enum: [planned, reading, finished] }
- *         rating: { type: integer, minimum: 1, maximum: 5 }
- *         startedAt: { type: string }
- *         finishedAt: { type: string }
- *         notes: { type: string }
- */
-
+//  GET all books
 /**
  * @swagger
  * /books:
  *   get:
- *     summary: List all books
- *     tags: [Books]
- *     responses:
- *       200:
- *         description: Array of books
- *   post:
- *     summary: Create a book
- *     tags: [Books]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema: { $ref: '#/components/schemas/Book' }
- *     responses:
- *       201:
- *         description: Created with new id
- *
- * /books/{id}:
- *   get:
- *     summary: Get a book by id
- *     tags: [Books]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: string }
- *     responses:
- *       200: { description: Found }
- *       404: { description: Not found }
- *   put:
- *     summary: Update a book by id
- *     tags: [Books]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: string }
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema: { $ref: '#/components/schemas/Book' }
- *     responses:
- *       204: { description: Updated }
- *       404: { description: Not found }
- *   delete:
- *     summary: Delete a book by id
- *     tags: [Books]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: string }
- *     responses:
- *       200: { description: Deleted }
- *       404: { description: Not found }
+ *     summary: Get all books
  */
+router.get('/books', booksController.getAll);
 
-router.get('/', listBooks);
-router.get('/:id', getBook);
-router.post('/', createBook);
-router.put('/:id', updateBook);
-router.delete('/:id', deleteBook);
+//  GET by ID
+router.get('/books/:id', booksController.getSingle);
+
+//  POST new book
+/**
+ * @swagger
+ * /books:
+ *   post:
+ *     summary: Create a new book
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: book
+ *         description: The book to create
+ *         schema:
+ *           type: object
+ *           required:
+ *             - title
+ *             - author
+ *             - genre
+ *             - status
+ *             - rating
+ *             - notes
+ *           properties:
+ *             title:
+ *               type: string
+ *               example: The Pragmatic Programmer
+ *             author:
+ *               type: string
+ *               example: Andrew Hunt
+ *             genre:
+ *               type: string
+ *               example: Software Engineering
+ *             status:
+ *               type: string
+ *               example: reading
+ *             rating:
+ *               type: integer
+ *               example: 5
+ *             notes:
+ *               type: string
+ *               example: Fantastic read for developers.
+ */
+router.post('/books', booksController.createBook);
+
+//  PUT update book
+/**
+ * @swagger
+ * /books/{id}:
+ *   put:
+ *     summary: Update a book by ID
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: MongoDB ID of the book to update
+ *         schema:
+ *           type: string
+ *       - in: body
+ *         name: book
+ *         description: Updated book data
+ *         schema:
+ *           type: object
+ *           properties:
+ *             title:
+ *               type: string
+ *               example: Updated Title
+ *             status:
+ *               type: string
+ *               example: completed
+ *             rating:
+ *               type: integer
+ *               example: 4
+ */
+router.put('/books/:id', booksController.updateBook);
+
+//  DELETE
+router.delete('/books/:id', booksController.deleteBook);
 
 module.exports = router;
