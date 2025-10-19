@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger-output.json');
-const { connect } = require('./db/connection'); // ✅ use connect (not connectDB)
+const { connect } = require('./db/connection'); 
 require('dotenv').config();
 
 const app = express();
@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 3001;
   try {
     const uri = process.env.MONGODB_URI;
     if (!uri) throw new Error('Missing MONGODB_URI');
-    await connect(uri); // ✅ connect to Mongo before listening
+    await connect(uri);
     app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
   } catch (err) {
     console.error(err);

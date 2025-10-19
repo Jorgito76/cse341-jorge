@@ -5,20 +5,22 @@
     "description": "API documentation for the Book Tracker project",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "servers": [
+  "host": "cse341-jorge.onrender.com",
+  "basePath": "/",
+  "tags": [
     {
-      "url": "https://cse341-jorge.onrender.com",
-      "description": "Render"
-    },
-    {
-      "url": "http://localhost:3001",
-      "description": "Local"
+      "name": "Books",
+      "description": "Book resources"
     }
   ],
-  "basePath": "/",
   "schemes": [
-    "http"
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
   ],
   "paths": {
     "/": {
