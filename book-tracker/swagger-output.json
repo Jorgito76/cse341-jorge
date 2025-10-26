@@ -14,7 +14,8 @@
     }
   ],
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -121,12 +122,23 @@
                 "name": "main"
               }
             }
-          },
-          "400": {
-            "description": "Validation failed"
-          },
-          "500": {
-            "description": "Server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/BookCreate"
+              },
+              "example": {
+                "title": "Clean Architecture",
+                "author": "Robert C. Martin",
+                "genre": "Software",
+                "status": "planned",
+                "rating": 5
+              }
+            }
           }
         }
       }
@@ -251,27 +263,36 @@
       "properties": {
         "title": {
           "type": "string",
-          "example": "Atomic Habits"
+          "example": "Clean Architecture"
         },
         "author": {
           "type": "string",
-          "example": "James Clear"
+          "example": "Robert C. Martin"
         },
         "genre": {
           "type": "string",
-          "example": "Self-Improvement"
+          "example": "Software"
+        },
+        "isbn": {
+          "type": "string",
+          "example": "978-0134494166"
         },
         "status": {
           "type": "string",
-          "example": "reading"
+          "example": "planned"
         },
         "rating": {
           "type": "number",
           "example": 5
         },
+        "startedAt": {
+          "type": "string",
+          "example": "2025-10-01"
+        },
+        "finishedAt": {},
         "notes": {
           "type": "string",
-          "example": "Excellent guide on building better habits."
+          "example": "To read soon"
         }
       }
     },
@@ -280,27 +301,23 @@
       "properties": {
         "title": {
           "type": "string",
-          "example": "Atomic Habits"
+          "example": "Clean Architecture (2nd Edition)"
         },
         "author": {
           "type": "string",
-          "example": "James Clear"
+          "example": "Robert C. Martin"
         },
         "genre": {
           "type": "string",
-          "example": "Self-Improvement"
+          "example": "Software"
         },
         "status": {
           "type": "string",
-          "example": "completed"
+          "example": "reading"
         },
         "rating": {
           "type": "number",
-          "example": 4
-        },
-        "notes": {
-          "type": "string",
-          "example": "Finished reading — very useful."
+          "example": 5
         }
       }
     }
