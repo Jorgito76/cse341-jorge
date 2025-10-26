@@ -42,7 +42,61 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Array of books",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "68e1701a017b73509b11b427"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "The Pragmatic Programmer"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Andrew Hunt, David Thomas"
+                  },
+                  "isbn": {
+                    "type": "string",
+                    "example": "978-0201616224"
+                  },
+                  "genre": {
+                    "type": "string",
+                    "example": "Software"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "finished"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "example": 5
+                  },
+                  "startedAt": {
+                    "type": "string",
+                    "example": "2024-09-01"
+                  },
+                  "finishedAt": {
+                    "type": "string",
+                    "example": "2024-09-20"
+                  },
+                  "notes": {
+                    "type": "string",
+                    "example": "Classic."
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       },
@@ -52,23 +106,27 @@
         ],
         "summary": "Create a new book",
         "description": "",
-        "parameters": [
-          {
-            "name": "book",
-            "in": "body",
-            "required": true,
-            "description": "Book object that needs to be added",
-            "schema": {
-              "$ref": "#/definitions/BookCreate"
-            }
-          }
-        ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "68e1701a017b73509b11b427"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Validation failed"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
@@ -91,13 +149,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Book found"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid id"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       },
@@ -119,7 +180,7 @@
             "name": "book",
             "in": "body",
             "required": true,
-            "description": "Updated book fields",
+            "description": "Updated book fields (must satisfy schema)",
             "schema": {
               "$ref": "#/definitions/BookUpdate"
             }
@@ -127,13 +188,16 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Updated successfully (no content)"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid id or validation failed"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       },
@@ -154,13 +218,28 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Deleted",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "deleted": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid id"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
