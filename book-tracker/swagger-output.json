@@ -107,6 +107,17 @@
         ],
         "summary": "Create a new book",
         "description": "",
+        "parameters": [
+          {
+            "name": "book",
+            "in": "body",
+            "required": true,
+            "description": "Book to create",
+            "schema": {
+              "$ref": "#/definitions/BookCreate"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created",
@@ -120,23 +131,6 @@
               },
               "xml": {
                 "name": "main"
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/BookCreate"
-              },
-              "example": {
-                "title": "Clean Architecture",
-                "author": "Robert C. Martin",
-                "genre": "Software",
-                "status": "planned",
-                "rating": 5
               }
             }
           }

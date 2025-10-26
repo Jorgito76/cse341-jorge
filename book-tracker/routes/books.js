@@ -58,21 +58,12 @@ router.post(
   '/',
   /* #swagger.tags = ['Books'] */
   /* #swagger.summary = 'Create a new book' */
-  /* #swagger.requestBody = {
-        required: true,
-        content: {
-          'application/json': {
-            schema: { $ref: '#/definitions/BookCreate' },
-            example: {
-              title: 'Clean Architecture',
-              author: 'Robert C. Martin',
-              genre: 'Software',
-              status: 'planned',
-              rating: 5
-            }
-          }
-        }
-  } */
+  /* #swagger.parameters['book'] = {
+      in: 'body',
+      required: true,
+      description: 'Book to create',
+      schema: { $ref: '#/definitions/BookCreate' }
+} */
   /* #swagger.responses[201] = {
         description: 'Created',
         schema: { id: '68e1701a017b73509b11b427' }
