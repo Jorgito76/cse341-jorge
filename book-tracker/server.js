@@ -28,8 +28,21 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/', require('./routes'));
 
-const PORT = process.env.PORT || 3001;
+//  404 for unknown routes 
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
 
+//  Global Error Handler 
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message || err);
+  const status = err.status || 500;
+  const message = err.message || 'Internal Server Error';
+  res.status(status).json({ error: message });
+});
+
+// Start server
+const PORT = process.env.PORT || 3001;
 (async () => {
   try {
     const uri = process.env.MONGODB_URI;
