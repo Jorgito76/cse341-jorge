@@ -7,7 +7,7 @@ const doc = {
     version: '1.0.0'
   },
   host: 'cse341-jorge.onrender.com',
-  schemes: ['https'],
+  schemes: ['https', 'http'],
   basePath: '/',
   consumes: ['application/json'],
   produces: ['application/json'],
@@ -15,20 +15,22 @@ const doc = {
 
   definitions: {
     BookCreate: {
-      title: 'Atomic Habits',
-      author: 'James Clear',
-      genre: 'Self-Improvement',
-      status: 'reading',
+      title: 'Clean Architecture',
+      author: 'Robert C. Martin',
+      genre: 'Software',
+      isbn: '978-0134494166',
+      status: 'planned',
       rating: 5,
-      notes: 'Excellent guide on building better habits.'
+      startedAt: '2025-10-01',
+      finishedAt: null,
+      notes: 'To read soon'
     },
     BookUpdate: {
-      title: 'Atomic Habits',
-      author: 'James Clear',
-      genre: 'Self-Improvement',
-      status: 'completed',
-      rating: 4,
-      notes: 'Finished reading — very useful.'
+      title: 'Clean Architecture (2nd Edition)',
+      author: 'Robert C. Martin',
+      genre: 'Software',
+      status: 'reading',
+      rating: 5
     }
   }
 };

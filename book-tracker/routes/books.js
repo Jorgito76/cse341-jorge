@@ -58,26 +58,25 @@ router.post(
   '/',
   /* #swagger.tags = ['Books'] */
   /* #swagger.summary = 'Create a new book' */
-  /* 
-    Expected body aligns with Zod schema (title, author, genre required; others optional):contentReference[oaicite:3]{index=3}.
-  */
-  /* #swagger.parameters['book'] = {
-        in: 'body', required: true,
-        description: 'Book to create',
-        schema: {
-          $ref: '#/definitions/BookCreate'
-          // If you prefer inline example instead of $ref, you can use:
-          // title: 'Clean Architecture', author: 'Robert C. Martin', genre: 'Software',
-          // isbn: '978-0134494166', status: 'planned', rating: 4,
-          // startedAt: '2025-10-01', finishedAt: null, notes: 'To read next'
+  /* #swagger.requestBody = {
+        required: true,
+        content: {
+          'application/json': {
+            schema: { $ref: '#/definitions/BookCreate' },
+            example: {
+              title: 'Clean Architecture',
+              author: 'Robert C. Martin',
+              genre: 'Software',
+              status: 'planned',
+              rating: 5
+            }
+          }
         }
   } */
   /* #swagger.responses[201] = {
         description: 'Created',
         schema: { id: '68e1701a017b73509b11b427' }
   } */
-  /* #swagger.responses[400] = { description: 'Validation failed' } */
-  /* #swagger.responses[500] = { description: 'Server error' } */
   createBook
 );
 
