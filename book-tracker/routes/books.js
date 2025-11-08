@@ -70,6 +70,7 @@ router.post(
         description: 'Created',
         schema: { id: '68e1701a017b73509b11b427' }
   } */
+ /* #swagger.responses[401] = { description: 'Authentication required' } */
   createBook
 );
 
@@ -90,6 +91,7 @@ router.put(
   } */
   /* #swagger.responses[204] = { description: 'Updated successfully (no content)' } */
   /* #swagger.responses[400] = { description: 'Invalid id or validation failed' } */
+  /* #swagger.responses[401] = { description: 'Authentication required' } */
   /* #swagger.responses[404] = { description: 'Book not found' } */
   /* #swagger.responses[500] = { description: 'Server error' } */
   updateBook
@@ -107,6 +109,7 @@ router.delete(
   } */
   /* #swagger.responses[200] = { description: 'Deleted', schema: { deleted: true } } */
   /* #swagger.responses[400] = { description: 'Invalid id' } */
+  /* #swagger.responses[401] = { description: 'Authentication required' } */
   /* #swagger.responses[404] = { description: 'Book not found' } */
   /* #swagger.responses[500] = { description: 'Server error' } */
   deleteBook
