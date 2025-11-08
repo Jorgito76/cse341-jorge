@@ -4,6 +4,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger-output.json');
 const { connect } = require('./db/connection'); 
+const { auth, requiresAuth } = require('express-openid-connect');
 require('dotenv').config();
 
 const app = express();
@@ -17,12 +18,32 @@ app.use(cors({
 
 app.use(express.json());
 
+
+
 // Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Health check
 app.get('/', (req, res) => {
   res.send('Book Tracker API is up');
+});
+
+// ===== Auth0 (express-openid-connect) =====
+app.use(auth({
+  authRequired: false,            // GETs stay public; writes can be protected in routes
+  auth0Logout: true,              // /logout redirects via Auth0
+  secret: process.env.SECRET,
+  baseURL: process.env.BASE_URL,  // http://localhost:3001 
+  clientID: process.env.CLIENT_ID,
+  issuerBaseURL: process.env.ISSUER_BASE_URL
+}));
+
+// Quick auth probes
+app.get('/auth-status', (req, res) => {
+  res.json({ authenticated: !!req.oidc?.isAuthenticated(), user: req.oidc?.user || null });
+});
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.json({ authenticated: true, user: req.oidc.user });
 });
 
 // Routes

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { requiresAuth } = require('express-openid-connect');
 
 const {
   listBooks,
@@ -56,6 +57,7 @@ router.get(
 // POST /books - Create a new book
 router.post(
   '/',
+   requiresAuth(),
   /* #swagger.tags = ['Books'] */
   /* #swagger.summary = 'Create a new book' */
   /* #swagger.parameters['book'] = {
@@ -74,6 +76,7 @@ router.post(
 // PUT /books/{id} - Update an existing book
 router.put(
   '/:id',
+   requiresAuth(),
   /* #swagger.tags = ['Books'] */
   /* #swagger.summary = 'Update an existing book' */
   /* #swagger.parameters['id'] = {
@@ -95,6 +98,7 @@ router.put(
 // DELETE /books/{id} - Delete a book
 router.delete(
   '/:id',
+  requiresAuth(),
   /* #swagger.tags = ['Books'] */
   /* #swagger.summary = 'Delete a book by ID' */
   /* #swagger.parameters['id'] = {

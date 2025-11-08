@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "express": "^4.19.2",
+    "express-openid-connect": "^2.19.2",
     "mongodb": "^6.9.0",
     "swagger-autogen": "^2.23.7",
     "swagger-jsdoc": "^6.2.8",
